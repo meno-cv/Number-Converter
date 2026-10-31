@@ -69,11 +69,93 @@ public class NumberConverter{
                     break;
 
                 case 2:
-                    System.out.println("\nBinary converter will be added soon!");
+                    System.out.println("\n------ BINARY CONVERTER ------");
+
+                    boolean valid2 = false;
+
+                    while (!valid2) {
+
+                        System.out.print("Enter a binary number: ");
+                        String binaryNum = input.next();
+
+                        boolean correct = true;
+                        long decimal = 0;
+                        long place = 1;
+
+                        for (int i = binaryNum.length() - 1; i >= 0; i--) {
+
+                            char digit = binaryNum.charAt(i);
+
+                            if (digit != '0' && digit != '1') {
+                                correct = false;
+                                break;
+                            }
+
+                            decimal += (digit - '0') * place;
+                            place *= 2;
+                        }
+
+                        if (!correct) {
+                            System.out.println("Invalid binary number! Only 0 and 1 are allowed.");
+                            continue;
+                        }
+
+                        String octal = Long.toOctalString(decimal);
+                        String hexadecimal = Long.toHexString(decimal).toUpperCase();
+
+                        System.out.println("\nBinary       : " + binaryNum);
+                        System.out.println("Decimal      : " + decimal);
+                        System.out.println("Octal        : " + octal);
+                        System.out.println("Hexadecimal  : " + hexadecimal);
+
+                        valid2 = true;
+                    }
+
                     break;
 
                 case 3:
-                    System.out.println("\nOctal converter will be added soon!");
+                    System.out.println("\n------ OCTAL CONVERTER ------");
+
+                    boolean valid3 = false;
+
+                    while (!valid3) {
+
+                        System.out.print("Enter an octal number: ");
+                        String octalNum = input.next();
+
+                        boolean correct = true;
+                        long decimal = 0;
+                        long place = 1;
+
+                        for (int i = octalNum.length() - 1; i >= 0; i--) {
+
+                            char digit = octalNum.charAt(i);
+
+                            if (digit < '0' || digit > '7') {
+                                correct = false;
+                                break;
+                            }
+
+                            decimal += (digit - '0') * place;
+                            place *= 8;
+                        }
+
+                        if (!correct) {
+                            System.out.println("Invalid octal number! Only digits 0 to 7 are allowed.");
+                            continue;
+                        }
+
+                        String binary = Long.toBinaryString(decimal);
+                        String hexadecimal = Long.toHexString(decimal).toUpperCase();
+
+                        System.out.println("\nOctal        : " + octalNum);
+                        System.out.println("Decimal      : " + decimal);
+                        System.out.println("Binary       : " + binary);
+                        System.out.println("Hexadecimal  : " + hexadecimal);
+
+                        valid3 = true;
+                    }
+
                     break;
 
                 case 4:
