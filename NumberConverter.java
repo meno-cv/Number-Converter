@@ -158,9 +158,54 @@ public class NumberConverter{
 
                     break;
 
-                case 4:
-                    System.out.println("\nHexadecimal converter will be added soon!");
-                    break;
+               case 4:
+    System.out.println("\n------ HEXADECIMAL CONVERTER ------");
+
+    boolean valid4 = false;
+
+    while (!valid4) {
+
+        System.out.print("Enter a hexadecimal number: ");
+        String hexNum = input.next();
+
+        boolean correct = true;
+        long decimal = 0;
+
+        for (int i = 0; i < hexNum.length(); i++) {
+
+            char digit = Character.toUpperCase(hexNum.charAt(i));
+            int value;
+
+            if (digit >= '0' && digit <= '9') {
+                value = digit - '0';
+            } else if (digit >= 'A' && digit <= 'F') {
+                value = digit - 'A' + 10;
+            } else {
+                correct = false;
+                break;
+            }
+
+            decimal = decimal * 16+value;
+        }
+
+        if (!correct) {
+            System.out.println("Invalid hexadecimal number! Use digits 0-9 and letters A-F.");
+            continue;
+        }
+
+
+        String binary = Long.toBinaryString(decimal);
+        String octal = Long.toOctalString(decimal);
+
+        System.out.println("\nHexadecimal  : " + hexNum.toUpperCase());
+        System.out.println("Decimal      : " + decimal);
+        System.out.println("Binary       : " + binary);
+        System.out.println("Octal        : " + octal);
+
+        valid4 = true;
+    }
+
+    break;
 
                 case 5:
                     System.out.println("\nRoman numeral converter will be added soon!");
