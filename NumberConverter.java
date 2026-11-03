@@ -208,8 +208,163 @@ public class NumberConverter{
     break;
 
                 case 5:
-                    System.out.println("\nRoman numeral converter will be added soon!");
+    System.out.println("\n------ ROMAN NUMERAL CONVERTER ------");
+    System.out.println("1. Decimal to Roman");
+    System.out.println("2. Roman to Decimal");
+    System.out.print("Enter your choice: ");
+
+    if (!input.hasNextInt()) {
+        System.out.println("Invalid input! Please enter 1 or 2.");
+        input.nextLine();
+        break;
+    }
+
+    int option2 = input.nextInt();
+
+    int[] values = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
+    String[] symbols = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+
+    switch (option2) {
+
+        case 1:
+            System.out.print("Enter a decimal number (1-3999): ");
+
+            if (!input.hasNextInt()) {
+                System.out.println("Invalid input! Please enter a number.");
+                input.nextLine();
+                break;
+            }
+
+            int decimalNum = input.nextInt();
+
+            if (decimalNum < 1 || decimalNum > 3999) {
+                System.out.println("Please enter a number between 1 and 3999.");
+                break;
+            }
+
+            int temp = decimalNum;
+            String roman = "";
+
+            for (int i = 0; i < values.length; i++) {
+
+                while (temp >= values[i]) {
+                    roman += symbols[i];
+                    temp -= values[i];
+                }
+            }
+
+            System.out.println("Decimal      : " + decimalNum);
+            System.out.println("Roman        : " + roman);
+
+            break;
+
+        case 2:
+            System.out.print("Enter a Roman numeral: ");
+            String romanNum = input.next().toUpperCase();
+
+            int total = 0;
+            boolean correct = true;
+
+            for (int i = 0; i < romanNum.length(); i++) {
+
+                int current = 0;
+                int next = 0;
+
+                switch (romanNum.charAt(i)) {
+                    case 'I':
+                        current = 1;
+                        break;
+                    case 'V':
+                        current = 5;
+                        break;
+                    case 'X':
+                        current = 10;
+                        break;
+                    case 'L':
+                        current = 50;
+                        break;
+                    case 'C':
+                        current = 100;
+                        break;
+                    case 'D':
+                        current = 500;
+                        break;
+                    case 'M':
+                        current = 1000;
+                        break;
+                    default:
+                        correct = false;
+                }
+
+                if (!correct) {
                     break;
+                }
+
+                if (i + 1 < romanNum.length()) {
+
+                    switch (romanNum.charAt(i + 1)) {
+                        case 'I':
+                            next = 1;
+                            break;
+                        case 'V':
+                            next = 5;
+                            break;
+                        case 'X':
+                            next = 10;
+                            break;
+                        case 'L':
+                            next = 50;
+                            break;
+                        case 'C':
+                            next = 100;
+                            break;
+                        case 'D':
+                            next = 500;
+                            break;
+                        case 'M':
+                            next = 1000;
+                            break;
+                    }
+                }
+
+                if (current < next) {
+                    total -= current;
+                } else {
+                    total += current;
+                }
+            }
+
+            if (!correct || romanNum.isEmpty()) {
+                System.out.println("Invalid Roman numeral!");
+                break;
+            }
+
+            int check = total;
+            String convertedRoman = "";
+
+            for (int i = 0; i < values.length; i++) {
+
+                while (check >= values[i]) {
+                    convertedRoman += symbols[i];
+                    check -= values[i];
+                }
+            }
+
+            if (total < 1 || total > 3999 || !convertedRoman.equals(romanNum)) {
+                System.out.println("Invalid Roman numeral!");
+            } else {
+                System.out.println("Roman        : " + romanNum);
+                System.out.println("Decimal      : " + total);
+            }
+
+            break;
+
+        default:
+            System.out.println("Invalid choice! Please select 1 or 2.");
+    }
+    
+
+    break;
 
                 case 6:
                     System.out.println("\nThank you for using Number Converter!");
